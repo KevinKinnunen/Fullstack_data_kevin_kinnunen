@@ -1,14 +1,12 @@
 desc;
 
-SELECT
-	*
-FROM
-	information_schema.schemata;
+SELECT * 
+FROM information_schema.schemata
+WHERE catalog_name = 'youtube_data';
 
 CREATE SCHEMA IF NOT EXISTS marts;
 
-CREATE TABLE IF NOT EXISTS marts.content_view_time AS 
-(
+CREATE TABLE IF NOT EXISTS marts.content_view_time AS (
 SELECT
 	Videotitel,
 	"Publiceringstid för video" AS Publiceringstid,
@@ -30,22 +28,6 @@ SELECT
 FROM
 	innehall.totalt);
 
+SELECT * FROM information_schema.tables WHERE table_schema = 'marts';
 
-
-SELECT
-	*
-FROM
-	information_schema.tables
-WHERE
-	table_schema = 'marts';
-
-SELECT
-	*
-FROM
-	marts.content_view_time;
-
-
-SELECT
-	*
-FROM
-	marts.views_per_date;
+SELECT * FROM marts.views_per_date;
