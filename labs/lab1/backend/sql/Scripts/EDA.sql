@@ -11,6 +11,10 @@ FROM date_total as tot
 LEFT JOIN date_table as tab 
 ON tot.datum = tab.datum;
 
-SELECT Enhetstyp, count(*) AS total_rows,
+SELECT Enhetstyp, count(*) AS total_rows,sum(Visningar) as total_visningar
 FROM enhetstyp.diagramdata
 GROUP BY Enhetstyp;
+
+SELECT * EXCLUDE (Innehåll) 
+FROM innehall.tabelldata
+ORDER BY "visningstid (timmar)" DESC;

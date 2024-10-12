@@ -15,12 +15,16 @@ class ContentKPI:
             "visade timmar": df["Visningstid_timmar"].sum(),
             "prenumeranter": df["Prenumeranter"].sum(),
             "exponeringar": df["Exponeringar"].sum(),
+            # --- Added kpis --- 
+            "avg viewing time": df["Visningstid_timmar"].mean(), # Avg ctr across all videos
+            "avg click freq": df["Klickfrekvens_exponering_%"].mean(), # Avg click freq %
+            "avg views per vid": df["Visningar"].mean() # Avg view per vid
         }
 
         for col, kpi in zip(st.columns(len(kpis)), kpis):
             with col: 
                 st.metric(kpi, round(kpis[kpi]))
-        st.dataframe(df)
+        #st.dataframe(df)
 
 # create more KPIs here
 class DeviceKPI:
