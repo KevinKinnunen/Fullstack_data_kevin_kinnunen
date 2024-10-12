@@ -10,7 +10,7 @@ class ContentKPI:
         st.markdown("## KPIer för videor")
         st.markdown("Nedan visas KPIer för totalt antal")
 
-        kpis = {
+        kpi_options = {
             "videor": len(df),
             "visade timmar": df["Visningstid_timmar"].sum(),
             "prenumeranter": df["Prenumeranter"].sum(),
@@ -21,9 +21,15 @@ class ContentKPI:
             "avg views per vid": df["Visningar"].mean() # Avg view per vid
         }
 
-        for col, kpi in zip(st.columns(len(kpis)), kpis):
+        selected_kpis = st.multiselect( # st.multiselect to allow users to select options from the KPI options list
+            "Välj vilka KPIer du vill visa",
+            options=kpi_options.keys(), # All available KPIs are shown as options
+            default=list(kpi_options.keys()) # All KPI options are visible by default
+        )
+
+        for col, kpi in zip(st.columns(len(selected_kpis)), selected_kpis):
             with col: 
-                st.metric(kpi, round(kpis[kpi]))
+                st.metric(kpi, round(kpi_options[kpi]))
         #st.dataframe(df)
 
 # create more KPIs here
